@@ -1,0 +1,21 @@
+# Format: [Timestamp] [Level] - [Message]
+
+[2024-11-26 09:30:00] [INFO] - Application 'Service A' starting successfully. Version: 1.2.0 build 20241126.
+[2024-11-26 09:30:01] [DEBUG] - Configuration loaded from file: /etc/app/config.ini.
+[2024-11-26 09:30:05] [INFO] - Connecting to primary database: postgresql://db.local:5432/app_db.
+[2024-11-26 09:30:10] [WARNING] - User 'admin' failed login 3 consecutive times from IP 192.168.1.101. Account temporarily locked.
+[2024-11-26 09:35:22] [INFO] - User ID 45 ('jdoe') successfully logged in.
+[2024-11-26 09:35:30] [INFO] - Starting background task: Process Payment Queue.
+[2024-11-26 09:40:00] [DEBUG] - Performing cache cleanup operation. Items removed: 150.
+[2024-11-26 09:42:10] [INFO] - Background task completed. 88 transactions processed.
+[2024-11-26 09:45:15] [INFO] - API Request GET /api/data/users with parameters limit=100.
+[2024-11-26 09:45:16] [ERROR] - SQL Query Error: Database connection timed out while accessing table 'users'.
+[2024-11-26 09:45:17] [WARNING] - Cannot connect to primary DB, failing over to secondary database.
+[2024-11-26 09:45:20] [INFO] - Successfully connected to secondary DB.
+[2024-11-26 09:50:00] [INFO] - User ID 120 ('asmith') logged out.
+[2024-11-26 10:00:00] [INFO] - Starting periodic system health check.
+[2024-11-26 10:00:01] [DEBUG] - Memory usage: 45%. CPU Load: 12%.
+[2024-11-26 10:05:30] [WARNING] - Disk space critically low. Remaining space: 8.5 GB (9%).
+[2024-11-26 10:15:00] [ERROR] - Exception occurred during file processing: java.io.FileNotFoundException: data.txt (No such file or directory)
+[2024-11-26 10:20:00] [CRITICAL] - Severe system error: Cannot write to log directory. Application forced to terminate.
+[2024-11-26 10:20:01] [INFO] - Application terminated.
