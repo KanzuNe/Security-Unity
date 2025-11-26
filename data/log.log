@@ -19,3 +19,54 @@
 [2024-11-26 10:15:00] [ERROR] - Exception occurred during file processing: java.io.FileNotFoundException: data.txt (No such file or directory)
 [2024-11-26 10:20:00] [CRITICAL] - Severe system error: Cannot write to log directory. Application forced to terminate.
 [2024-11-26 10:20:01] [INFO] - Application terminated.
+
+# Different bracket formats for testing
+
+# Format 1: (Timestamp) (Level) - Message
+(2024-11-26 10:25:00) (INFO) - System restart initiated by admin user.
+(2024-11-26 10:25:05) (DEBUG) - Loading system modules: auth, db, cache, logging.
+(2024-11-26 10:25:10) (WARNING) - High memory usage detected: 85% of available RAM.
+(2024-11-26 10:25:15) (ERROR) - Failed to initialize payment gateway connection.
+(2024-11-26 10:25:20) (CRITICAL) - Security breach detected from IP: 203.0.113.42.
+
+# Format 2: [Timestamp] (Level) - Message  
+[2024-11-26 10:30:00] (INFO) - Service recovery process started.
+[2024-11-26 10:30:02] (DEBUG) - Checking database integrity...
+[2024-11-26 10:30:05] (WARNING) - Backup service is offline, manual backup recommended.
+[2024-11-26 10:30:08] (ERROR) - Authentication server timeout after 30 seconds.
+[2024-11-26 10:30:12] (CRITICAL) - Multiple failed authentication attempts detected.
+
+# Format 3: (Timestamp) [Level] - Message
+(2024-11-26 10:35:00) [INFO] - User session cleanup completed.
+(2024-11-26 10:35:03) [DEBUG] - Cache hit ratio: 92.5% over last hour.
+(2024-11-26 10:35:07) [WARNING] - SSL certificate expires in 7 days.
+(2024-11-26 10:35:10) [ERROR] - Email service provider returned HTTP 503.
+(2024-11-26 10:35:15) [CRITICAL] - Disk failure detected on primary storage array.
+
+# Format 4: No brackets - Timestamp Level Message
+2024-11-26 10:40:00 INFO Application health check passed.
+2024-11-26 10:40:02 DEBUG Processing queue has 1,247 pending items.
+2024-11-26 10:40:05 WARNING Rate limit exceeded for API key 'prod-key-001'.
+2024-11-26 10:40:08 ERROR Unable to connect to external service: weather-api.
+2024-11-26 10:40:12 CRITICAL System shutdown imminent due to hardware failure.
+
+# Format 5: [Timestamp] [Level]: Message (with colon instead of dash)
+[2024-11-26 10:45:00] [INFO]: Scheduled maintenance window started.
+[2024-11-26 10:45:03] [DEBUG]: Thread pool resized to 50 workers.
+[2024-11-26 10:45:07] [WARNING]: Connection pool nearly exhausted: 95% utilization.
+[2024-11-26 10:45:10] [ERROR]: File upload failed: insufficient storage space.
+[2024-11-26 10:45:15] [CRITICAL]: Primary database server is unresponsive.
+
+# Format 6: Timestamp - Level - Message (with dashes as separators)
+2024-11-26 10:50:00 - INFO - Background job scheduler restarted.
+2024-11-26 10:50:03 - DEBUG - Loaded 1,342 configuration parameters.
+2024-11-26 10:50:07 - WARNING - Network latency spike detected: 250ms average.
+2024-11-26 10:50:10 - ERROR - Third-party API returned malformed JSON response.
+2024-11-26 10:50:15 - CRITICAL - Security certificate validation failed.
+
+# Format 7: Mixed brackets with no separators
+[2024-11-26 10:55:00] (INFO) System monitoring dashboard updated.
+(2024-11-26 10:55:03) [DEBUG] Memory garbage collection completed in 45ms.
+[2024-11-26 10:55:07] (WARNING) Unusual traffic pattern detected from subnet 10.0.0.0/24.
+(2024-11-26 10:55:10) [ERROR] Message queue consumer failed to process batch.
+[2024-11-26 10:55:15] (CRITICAL) Emergency shutdown protocol activated.

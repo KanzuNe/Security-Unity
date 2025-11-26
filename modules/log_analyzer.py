@@ -13,8 +13,18 @@ class Error:
     error_list =[]
 
 
-pattern = r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (INFO|ERROR|WARNING|DEBUG|CRITICAL) (.+)"
 
+patterns = [
+    r"\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] \[(INFO|ERROR|WARNING|DEBUG|CRITICAL)\][ -]*(.+)",  # [timestamp] [level] - message
+    r"\((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\) \((INFO|ERROR|WARNING|DEBUG|CRITICAL)\)[ -]*(.+)",  # (timestamp) (level) - message
+    r"\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] \((INFO|ERROR|WARNING|DEBUG|CRITICAL)\)[ -]*(.+)",  # [timestamp] (level) - message
+    r"\((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\) \[(INFO|ERROR|WARNING|DEBUG|CRITICAL)\][ -]*(.+)",  # (timestamp) [level] - message
+    r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (INFO|ERROR|WARNING|DEBUG|CRITICAL)[ -]*(.+)",  # timestamp level - message (no brackets)
+    r"\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] \[(INFO|ERROR|WARNING|DEBUG|CRITICAL)\]:[ ]*(.+)",  # [timestamp] [level]: message (with colon)
+    r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) - (INFO|ERROR|WARNING|DEBUG|CRITICAL) - (.+)",  # timestamp - level - message (dash separators)
+    r"\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] \((INFO|ERROR|WARNING|DEBUG|CRITICAL)\) (.+)",  # [timestamp] (level) message (no separator)
+    r"\((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\) \[(INFO|ERROR|WARNING|DEBUG|CRITICAL)\] (.+)",  # (timestamp) [level] message (no separator)
+]
 
 
 
@@ -45,33 +55,32 @@ class MyWindow(QMainWindow):
         filename, _ = QFileDialog.getOpenFileName(parent=self, caption='Open Log File', directory ='.', filter='Log Files (*.log);;Text Files (*.txt)')
         with open(filename, "r", encoding="utf-8") as f:
             for line in f:
-                match= re.search(pattern, line)
-                if match:
-                    timestamp = match.group(1)
-                    level = match.group(2)
-                    message = match.group(3)
-                    Error.error_list.append(Error(timestamp, level, message))
-                    if level.lower() == "info":
-                            self.info_counter += 1
-                    elif level.lower() == "error":
-                            self.error_counter += 1
-                    elif level.lower() == "warning":
-                            self.warning_counter += 1
-                    elif level.lower() == "debug":
-                            self.debug_counter += 1
-                    elif level.lower() == "critical":
-                            self.critical_counter += 1
+                for pattern in patterns:
+                    match= re.search(pattern, line)
+                    if match:
+                        timestamp = match.group(1)
+                        level = match.group(2)
+                        message = match.group(3)
+                        Error.error_list.append(Error(timestamp, level, message))
+                        if level.lower() == "info":
+                                self.info_counter += 1
+                        elif level.lower() == "error":
+                                self.error_counter += 1
+                        elif level.lower() == "warning":
+                                self.warning_counter += 1
+                        elif level.lower() == "debug":
+                                self.debug_counter += 1
+                        elif level.lower() == "critical":
+                                self.critical_counter += 1
+            self.update_table()
+            self.update_counter()
     
-                    # Optional: Print loaded entries
-                    print(f"Loaded {len(self.error_list)} entries")
-        self.update_table()
-        self.update_counter()
     def update_counter(self):
         level = [("INFO", self.info_counter),("ERROR", self.error_counter),("WARNING", self.warning_counter),("DEBUG", self.debug_counter),("CRITICAL", self.critical_counter)]
         self.counter.setRowCount(5)
         for index, (level, count) in enumerate(level):
             self.counter.setItem(index, 0, QTableWidgetItem(level))
-            self.counter.setItem(index, 1, QTableWidgetItem(count))
+            self.counter.setItem(index, 1, QTableWidgetItem(str(count)))
         
         
     
@@ -87,6 +96,7 @@ class MyWindow(QMainWindow):
         search_text = self.search_bar.toPlainText().strip().lower()
         if not search_text:
             self.show_all()
+            return
 
         for error in self.error_list:
             if search_text in error.timestamp.lower() or search_text in error.level.lower() or search_text in error.message.lower():
