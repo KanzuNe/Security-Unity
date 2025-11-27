@@ -24,6 +24,7 @@ patterns = [
     r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) - (INFO|ERROR|WARNING|DEBUG|CRITICAL) - (.+)",  # timestamp - level - message (dash separators)
     r"\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] \((INFO|ERROR|WARNING|DEBUG|CRITICAL)\) (.+)",  # [timestamp] (level) message (no separator)
     r"\((\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\) \[(INFO|ERROR|WARNING|DEBUG|CRITICAL)\] (.+)",  # (timestamp) [level] message (no separator)
+    
 ]
 
 
@@ -81,8 +82,7 @@ class MyWindow(QMainWindow):
         for index, (level, count) in enumerate(level):
             self.counter.setItem(index, 0, QTableWidgetItem(level))
             self.counter.setItem(index, 1, QTableWidgetItem(str(count)))
-        
-        
+          
     
     def update_table(self):
         self.log_table.setRowCount(len(self.error_list))
@@ -90,6 +90,9 @@ class MyWindow(QMainWindow):
             self.log_table.setItem(index, 0, QTableWidgetItem(error.timestamp))
             self.log_table.setItem(index, 1, QTableWidgetItem(error.level))
             self.log_table.setItem(index, 2, QTableWidgetItem(error.message))
+        self.log_table.sortItems(0, order=QtAscendingOrder)
+        self.log_table.sortItems(1, order=QtAscendingOrder)
+        self.log_table.sortItems(2, order=QtAscendingOrder)
 
     def update_table_search(self):
         self.filtered_list = []
@@ -111,6 +114,8 @@ class MyWindow(QMainWindow):
         self.update_table()
         self.search_bar.clear()
         self.statusbar.showMessage(f"Reset Filter!")
+
+    
 
 
 
