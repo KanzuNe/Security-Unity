@@ -2,6 +2,7 @@ import re
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QFileDialog
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 
 class Error:
     def __init__(self, timestamp, level, message):
@@ -45,6 +46,9 @@ class MyWindow(QMainWindow):
         #Connect Button
         self.search_button.clicked.connect(self.update_table_search)
         self.choose_file.clicked.connect(self.inputButton)
+
+        #Enable Sorting
+        self.log_table.setSortingEnabled(True)
     def inputButton(self):
         Error.error_list.clear()
         self.info_counter = 0
@@ -85,14 +89,13 @@ class MyWindow(QMainWindow):
           
     
     def update_table(self):
+        self.log_table.setSortingEnabled(False)
         self.log_table.setRowCount(len(self.error_list))
         for index, error in enumerate(self.error_list):
             self.log_table.setItem(index, 0, QTableWidgetItem(error.timestamp))
             self.log_table.setItem(index, 1, QTableWidgetItem(error.level))
             self.log_table.setItem(index, 2, QTableWidgetItem(error.message))
-        self.log_table.sortItems(0, order=QtAscendingOrder)
-        self.log_table.sortItems(1, order=QtAscendingOrder)
-        self.log_table.sortItems(2, order=QtAscendingOrder)
+        self.log_table.setSortingEnabled(True)
 
     def update_table_search(self):
         self.filtered_list = []
