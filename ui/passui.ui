@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>581</width>
-    <height>346</height>
+    <height>345</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="searchbox">
+   <widget class="QLineEdit" name="search_bar">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -24,7 +24,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="SearchButton">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -37,7 +37,7 @@
      <string>Search</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="AddNew">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -56,7 +56,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="Update">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -75,7 +75,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="Delete">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -94,7 +94,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="GenerateRan">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -113,12 +113,12 @@
      </size>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="Welcome">
     <property name="geometry">
      <rect>
       <x>40</x>
       <y>10</y>
-      <width>91</width>
+      <width>531</width>
       <height>31</height>
      </rect>
     </property>
@@ -139,6 +139,27 @@
       <width>361</width>
       <height>192</height>
      </rect>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustToContents</enum>
+    </property>
+    <property name="autoScroll">
+     <bool>false</bool>
+    </property>
+    <property name="tabKeyNavigation">
+     <bool>false</bool>
+    </property>
+    <property name="showDropIndicator" stdset="0">
+     <bool>false</bool>
+    </property>
+    <property name="showGrid">
+     <bool>false</bool>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>119</number>
