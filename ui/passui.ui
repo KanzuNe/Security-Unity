@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>581</width>
-    <height>345</height>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>50</y>
+      <y>70</y>
       <width>221</width>
-      <height>20</height>
+      <height>31</height>
      </rect>
     </property>
    </widget>
@@ -28,9 +28,9 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>50</y>
-      <width>75</width>
-      <height>23</height>
+      <y>70</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -40,10 +40,10 @@
    <widget class="QPushButton" name="AddNew">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>90</y>
-      <width>100</width>
-      <height>30</height>
+      <x>20</x>
+      <y>320</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -59,10 +59,10 @@
    <widget class="QPushButton" name="Update">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>130</y>
-      <width>100</width>
-      <height>30</height>
+      <x>160</x>
+      <y>320</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -78,10 +78,10 @@
    <widget class="QPushButton" name="Delete">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>170</y>
-      <width>100</width>
-      <height>30</height>
+      <x>300</x>
+      <y>320</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -97,10 +97,10 @@
    <widget class="QPushButton" name="GenerateRan">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>210</y>
-      <width>100</width>
-      <height>30</height>
+      <x>440</x>
+      <y>320</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -117,8 +117,8 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>10</y>
-      <width>531</width>
+      <y>30</y>
+      <width>361</width>
       <height>31</height>
      </rect>
     </property>
@@ -135,9 +135,9 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>90</y>
-      <width>361</width>
-      <height>192</height>
+      <y>110</y>
+      <width>521</width>
+      <height>201</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
@@ -161,8 +161,14 @@
     <property name="showGrid">
      <bool>false</bool>
     </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>true</bool>
+    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>119</number>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
     </attribute>
     <column>
      <property name="text">
@@ -171,7 +177,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Username</string>
+      <string>Account</string>
      </property>
     </column>
     <column>
@@ -191,7 +197,7 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>10</y>
+      <y>40</y>
       <width>141</width>
       <height>21</height>
      </rect>
@@ -209,7 +215,7 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>30</y>
+      <y>70</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -225,13 +231,64 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>50</y>
+      <y>90</y>
       <width>111</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="logout">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>10</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Log Out</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="checkreq">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>360</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Checking Requirement</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>10</width>
+      <height>10</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="checkbreach">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>360</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Check Breaches</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>10</width>
+      <height>10</height>
+     </size>
     </property>
    </widget>
   </widget>

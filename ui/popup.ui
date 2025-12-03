@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>321</width>
-    <height>192</height>
+    <width>326</width>
+    <height>225</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -102,7 +102,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>140</y>
+      <y>180</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -114,6 +114,34 @@
     </property>
     <property name="text">
      <string>Add/Update</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="date">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>140</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Date</string>
     </property>
    </widget>
   </widget>

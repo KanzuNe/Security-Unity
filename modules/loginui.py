@@ -5,21 +5,61 @@ from PyQt5 import uic
 from PyQt5.QtCore import Qt
 import json
 
+
 class Users:
      pass_list =[]
-     def __init__(self,website, username, password):
+     def __init__(self,website, username, password,last_updated):
           self.website = website
           self.username = username
           self.password = password
+          self.last_updated = last_updated
+
+
+class Requirement(QMainWindow):
+    def __init__(self, main_window, User=None):
+        super().__init__()
+        uic.loadUi(r"ui\requirement.ui", self)
+        self.main_window = main_window
+        self.User = User
+        self.setWindowTitle(f"Requirements")
+
+        #Disable
+        self.numchar.setEnabled(False)
+        self.upper.setEnabled(False)
+        self.lower.setEnabled(False)
+        self.num.setEnabled(False)
+        self.special.setEnabled(False)
+        
+        self.checking()
+
+    def checking(self):
+        if self.User is not None:
+            User = self.User
+            has_upper = any(char.isupper() for char in User.password)
+            has_lower = any(char.islower() for char in User.password)
+            has_digit = any(char.isdigit() for char in User.password)
+            has_special = any(not char.isalnum() for char in User.password)
+            if len(User.password) >=12:
+                self.numchar.setCheckState(True)
+            if has_upper:
+                self.upper.setCheckState(True)
+            if has_lower:
+                self.lower.setCheckState(True)
+            if has_digit:
+                self.num.setCheckState(True)
+            if has_special:
+                self.special.setCheckState(True)
 
 class PopUp(QMainWindow):
-    def __init__(self, username, main_window, mode="add"):
+    def __init__(self, username, main_window, mode="add", editor=None):
         super().__init__()
         uic.loadUi(r"ui\popup.ui", self)
         self.mode= mode
         self.current_user = username
         self.mainwindow = main_window
-        self.setWindowTitle(f"Add/Update")
+        self.editor = editor
+        self.setWindowTitle(f"Add/Update Password")
+        
         #events
         if mode == "add":
             self.pushButton.clicked.connect(self.add)
@@ -28,14 +68,14 @@ class PopUp(QMainWindow):
             self.pushButton.clicked.connect(self.edit)
 
     def edit(self):
-        selected_row = self.mainwindow.table.currentRow()
-        if selected_row >= 0:
-            user = Users.pass_list[selected_row]
-            user.website = self.website.text().strip()
-            user.username = self.username.text().strip()
-            user.password = self.password.text().strip()
+        if self.editor:
+            self.editor.website = self.website.text().strip()
+            self.editor.username = self.username.text().strip()
+            self.editor.password = self.password.text().strip()
             save_pass(self.current_user)
+            print("da save")
             self.mainwindow.update_table()
+            print("Da update")
             self.close()
         
     def add(self):
@@ -51,12 +91,10 @@ class PopUp(QMainWindow):
             QMessageBox.warning(self, "Warning", "Fill All Infos!")
 
     def load_user_to_fields(self):
-        selected_row = self.mainwindow.table.currentRow()
-        if selected_row >= 0:
-            user = Users.pass_list[selected_row]
-            self.website.setText(user.website)
-            self.username.setText(user.username)
-            self.password.setText(user.password)    
+        if self.editor:
+            self.website.setText(self.editor.website)
+            self.username.setText(self.editor.username)
+            self.password.setText(self.editor.password)    
 
 class MainUi(QMainWindow):
     def __init__(self, username):
@@ -66,8 +104,11 @@ class MainUi(QMainWindow):
         self.setWindowTitle(f"Password Manager - {username}")
         self.Welcome.setText(f"Welcome {username}!")
         self.table.setSortingEnabled(True)
+        self.table.verticalHeader().setVisible(True)
+        self.table.verticalHeader().show()
         load_pass(username)
         self.update_table()
+        
         #events
         self.SearchButton.clicked.connect(self.update_table_search)
         self.AddNew.clicked.connect(self.open_popup_add)
@@ -75,15 +116,23 @@ class MainUi(QMainWindow):
         self.Delete.clicked.connect(self.delete_user)
         self.GenerateRan.clicked.connect(self.generate_random)
         self.table.itemSelectionChanged.connect(self.update_pass_strength)
-        #Password Strength
+        self.logout.clicked.connect(self.log_out)
+        self.checkreq.clicked.connect(self.open_requirement)
+
         self.bar.setValue(0)
 
     def update_table(self):
         self.table.setRowCount(len(Users.pass_list))
-        for index, f in enumerate(Users.pass_list):
-             self.table.setItem(index, 0, QTableWidgetItem(f.website))
-             self.table.setItem(index, 1, QTableWidgetItem(f.username))
-             self.table.setItem(index, 2, QTableWidgetItem(f.password))
+        if len(Users.pass_list) == 0:
+            self.table.setColumnWidth(0, 200)
+            self.table.setColumnWidth(1, 150)  
+            self.table.setColumnWidth(2, 200) 
+        else:
+            for index, f in enumerate(Users.pass_list):
+                self.table.setItem(index, 0, QTableWidgetItem(f.website))
+                self.table.setItem(index, 1, QTableWidgetItem(f.username))
+                self.table.setItem(index, 2, QTableWidgetItem(f.password))
+            self.table.resizeColumnsToContents()
         self.table.clearSelection()
         self.table.setCurrentItem(None)
         self.bar.setValue(0)
@@ -97,11 +146,18 @@ class MainUi(QMainWindow):
         for s in Users.pass_list:
             if search_text in s.website.lower() or search_text in s.username.lower() or search_text in s.password.lower():
                 self.filtered_list.append(s)
-        self.table.setRowCount(len(self.filtered_list))  
-        for index, s in enumerate(self.filtered_list):
-            self.table.setItem(index, 0, QTableWidgetItem(s.website))
-            self.table.setItem(index, 1, QTableWidgetItem(s.username))
-            self.table.setItem(index, 2, QTableWidgetItem(s.password))
+        self.table.setRowCount(len(self.filtered_list))
+        if len(self.filtered_list) == 0:
+            self.table.setColumnWidth(0, 200) 
+            self.table.setColumnWidth(1, 150)  
+            self.table.setColumnWidth(2, 200) 
+            self.table.setVerticalHeaderLabels([])
+        else:
+            for index, s in enumerate(self.filtered_list):
+                self.table.setItem(index, 0, QTableWidgetItem(s.website))
+                self.table.setItem(index, 1, QTableWidgetItem(s.username))
+                self.table.setItem(index, 2, QTableWidgetItem(s.password))
+        self.table.resizeColumnsToContents()
         self.table.clearSelection()
         self.table.setCurrentItem(None)
 
@@ -132,12 +188,13 @@ class MainUi(QMainWindow):
     
     def open_popup_edit(self):
         selected_row = self.table.currentRow()
-        if selected_row >=0:
+        if selected_row >= 0:
+            editor = Users.pass_list[selected_row]
+            self.popup = PopUp(self.current_user, self, mode="edit", editor=editor)
+            self.popup.show()
             self.table.clearSelection()
             self.table.setCurrentItem(None)
             self.bar.setValue(0)
-            self.popup = PopUp(self.current_user, self, mode="edit")
-            self.popup.show()
         else:
             QMessageBox.warning(self, "Warning", "Please select a row to edit")
 
@@ -182,20 +239,34 @@ class MainUi(QMainWindow):
             return min(value, 100)
         return 0
 
+    def log_out(self):
+        self.hide()
+        self.LoginUi = LoginUi()
+        self.LoginUi.show()
+
+    def open_requirement(self):
+        selected_row = self.table.currentRow()
+        if selected_row >= 0:
+            User = Users.pass_list[selected_row]
+            self.req = Requirement(self, User = User)
+            self.req.show()
+            self.table.clearSelection()
+            self.table.setCurrentItem(None)
+            self.bar.setValue(0)
+        else:
+            QMessageBox.warning(self, "Warning", "Please select a row to check requirement")
 
 
-
-    
-        
         
 class LoginUi(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(r"ui\loginui.ui", self)
-        self.setWindowTitle(f"Log In")
+        self.setWindowTitle("Welcome to Your Vault - Select User")
         self.userlist = {}
         self.load_userlist()
         self.UserChoice.setCurrentText("")
+        
         #events
         self.EnterVault.clicked.connect(self.create_new_user)
     
@@ -263,9 +334,6 @@ def random_char():
     for _ in range(12):
         chars.append(random.choice(all_chars))
     return ''.join(chars)
-
-
-
 
 
 if __name__ == "__main__":
