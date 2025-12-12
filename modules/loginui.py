@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QTableWidget
 from PyQt5 import uic
 from PyQt5.QtCore import Qt
 import json
+from uicss import apply_login_styling, apply_main_ui_styling, apply_popup_styling
 
 
 class Users:
@@ -57,9 +58,16 @@ class PopUp(QMainWindow):
         self.mode= mode
         self.current_user = username
         self.mainwindow = main_window
+<<<<<<< HEAD
         self.editor = editor
         self.setWindowTitle(f"Add/Update Password")
         
+=======
+        self.setWindowTitle(f"Add/Update Password")
+        
+        apply_popup_styling(self)
+        
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
         #events
         if mode == "add":
             self.pushButton.clicked.connect(self.add)
@@ -109,6 +117,11 @@ class MainUi(QMainWindow):
         load_pass(username)
         self.update_table()
         
+<<<<<<< HEAD
+=======
+        apply_main_ui_styling(self)
+        
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
         #events
         self.SearchButton.clicked.connect(self.update_table_search)
         self.AddNew.clicked.connect(self.open_popup_add)
@@ -116,8 +129,11 @@ class MainUi(QMainWindow):
         self.Delete.clicked.connect(self.delete_user)
         self.GenerateRan.clicked.connect(self.generate_random)
         self.table.itemSelectionChanged.connect(self.update_pass_strength)
+<<<<<<< HEAD
         self.logout.clicked.connect(self.log_out)
         self.checkreq.clicked.connect(self.open_requirement)
+=======
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
 
         self.bar.setValue(0)
 
@@ -188,9 +204,14 @@ class MainUi(QMainWindow):
     
     def open_popup_edit(self):
         selected_row = self.table.currentRow()
+<<<<<<< HEAD
         if selected_row >= 0:
             editor = Users.pass_list[selected_row]
             self.popup = PopUp(self.current_user, self, mode="edit", editor=editor)
+=======
+        if selected_row >=0:
+            self.popup = PopUp(self.current_user, self, mode="edit")
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
             self.popup.show()
             self.table.clearSelection()
             self.table.setCurrentItem(None)
@@ -238,6 +259,7 @@ class MainUi(QMainWindow):
                 value += 20
             return min(value, 100)
         return 0
+<<<<<<< HEAD
 
     def log_out(self):
         self.hide()
@@ -257,6 +279,8 @@ class MainUi(QMainWindow):
             QMessageBox.warning(self, "Warning", "Please select a row to check requirement")
 
 
+=======
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
         
 class LoginUi(QMainWindow):
     def __init__(self):
@@ -267,6 +291,11 @@ class LoginUi(QMainWindow):
         self.load_userlist()
         self.UserChoice.setCurrentText("")
         
+<<<<<<< HEAD
+=======
+        apply_login_styling(self)
+        
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
         #events
         self.EnterVault.clicked.connect(self.create_new_user)
     

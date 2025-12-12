@@ -28,7 +28,11 @@
     <property name="geometry">
      <rect>
       <x>270</x>
+<<<<<<< HEAD
       <y>70</y>
+=======
+      <y>50</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>91</width>
       <height>31</height>
      </rect>
@@ -41,7 +45,11 @@
     <property name="geometry">
      <rect>
       <x>20</x>
+<<<<<<< HEAD
       <y>320</y>
+=======
+      <y>300</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>131</width>
       <height>31</height>
      </rect>
@@ -60,7 +68,11 @@
     <property name="geometry">
      <rect>
       <x>160</x>
+<<<<<<< HEAD
       <y>320</y>
+=======
+      <y>300</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>131</width>
       <height>31</height>
      </rect>
@@ -79,7 +91,11 @@
     <property name="geometry">
      <rect>
       <x>300</x>
+<<<<<<< HEAD
       <y>320</y>
+=======
+      <y>300</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>131</width>
       <height>31</height>
      </rect>
@@ -98,7 +114,11 @@
     <property name="geometry">
      <rect>
       <x>440</x>
+<<<<<<< HEAD
       <y>320</y>
+=======
+      <y>300</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>131</width>
       <height>31</height>
      </rect>
@@ -135,7 +155,11 @@
     <property name="geometry">
      <rect>
       <x>40</x>
+<<<<<<< HEAD
       <y>110</y>
+=======
+      <y>90</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>521</width>
       <height>201</height>
      </rect>
@@ -197,7 +221,11 @@
     <property name="geometry">
      <rect>
       <x>410</x>
+<<<<<<< HEAD
       <y>40</y>
+=======
+      <y>30</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>141</width>
       <height>21</height>
      </rect>
@@ -215,7 +243,11 @@
     <property name="geometry">
      <rect>
       <x>410</x>
+<<<<<<< HEAD
       <y>70</y>
+=======
+      <y>50</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>111</width>
       <height>16</height>
      </rect>
@@ -231,7 +263,11 @@
     <property name="geometry">
      <rect>
       <x>410</x>
+<<<<<<< HEAD
       <y>90</y>
+=======
+      <y>70</y>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
       <width>111</width>
       <height>16</height>
      </rect>

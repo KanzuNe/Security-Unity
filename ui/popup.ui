@@ -7,7 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>326</width>
+<<<<<<< HEAD
     <height>225</height>
+=======
+    <height>222</height>
+>>>>>>> fd2e4d143814e3eeb52ba2adabaf5b7acf757b28
    </rect>
   </property>
   <property name="windowTitle">
